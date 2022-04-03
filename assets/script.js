@@ -50,3 +50,21 @@ function setUpTimeBlocks(){
       }
     });
 }
+
+// function to pull task from local storage into corresponding time block 
+function renderSchedule(){
+  
+    toDoItems = localStorage.getItem("todos");
+    toDoItems = JSON.parse(toDoItems);
+  
+    //loop thru array then assign the text to the timeBlock with data-hour equal to hour. 
+    //make a variable where [data-hour={hour}] then plug it in to the selector $('[data-hour={hour}')
+    for (var i = 0; i < toDoItems.length; i++){
+      var itemHour = toDoItems[i].hour;
+      var itemText = toDoItems[i].text; 
+     
+      $("[data-hour=" + itemHour + "]").children("textarea").val(itemText);
+    }
+  
+    console.log(toDoItems);
+  }
