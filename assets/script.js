@@ -31,3 +31,22 @@ function initializeSchedule(){
       localStorage.setItem("todos", JSON.stringify(toDoItems));
       //console.log(toDoItems);
     }
+
+    //format time block colors. 3 colors depending on the time of day 'past, present, future'
+function setUpTimeBlocks(){
+    $timeBlocks.each(function(){
+      var $thisBlock = $(this);
+      var thisBlockHr = parseInt($thisBlock.attr("data-hour"));
+
+      //add color to time blocks to show where we are in the day 
+      if (thisBlockHr == currentHour) {
+        $thisBlock.addClass("present").removeClass("past future");
+      }
+      if (thisBlockHr < currentHour) {
+        $thisBlock.addClass("past").removeClass("present future");
+      }
+      if (thisBlockHr > currentHour) {
+        $thisBlock.addClass("future").removeClass("past present");
+      }
+    });
+}
